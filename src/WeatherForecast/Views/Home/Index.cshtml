@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center pos-rel">
+    <h1 class="display-4">
+        <strong>Belfast</strong>
+    </h1>
+
+    <button id="btnRefresh" class="btn btn-outline-dark pos-abs pos-b-r">
+        <i class="fa fa-refresh"></i> Refresh
+        <div class="progress">
+            <div id="autoRefresh" class="progress-bar" role="progressbar" ></div>
+        </div>
+    </button>
+</div>
+
+<div class="text-center">
+    <div id="forecastContent"></div>
+</div>

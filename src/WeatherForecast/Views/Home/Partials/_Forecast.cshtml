@@ -1,0 +1,45 @@
+﻿@using Microsoft.Extensions.Configuration
+@model ForecastViewModel
+@inject IConfiguration Config
+@{
+    // NOTE: Taking info config so it can be updated if/when needed by a simple config update.
+    string providerName = Config.GetSection("DataProviderSettings").GetValue<string>("Name");
+    string imageUrl = Config.GetSection("DataProviderSettings").GetValue<string>("ImageUrl");
+    string providerUrl = Config.GetSection("DataProviderSettings").GetValue<string>("ServiceUrl");
+    string providerLogo = Config.GetSection("DataProviderSettings").GetValue<string>("LogoUrl");
+
+}
+@if (Model == null)
+{
+    <div class="alert alert-danger">
+        <strong>Oops, something unexpected has happened. This may be an intermittent problem. Please refresh the page.</strong>
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <td>
+                    <strong>Today (@Model.Today.Date.ToString("ddd d MMM"))</strong>
+                </td>
+                <td>@Model.Today.WeatherName</td>
+                <td><img src="@string.Format(imageUrl, Model.Today.WeatherAbbreviation)" class="img-weather" alt="" /></td>
+            </tr>
+
+            @foreach (var item in Model.Days)
+            {
+                <tr>
+                    <td>
+                        <strong>@item.Date.ToString("ddd d MMM")</strong>
+                    </td>
+                    <td>@item.WeatherName</td>
+                    <td><img src="@string.Format(imageUrl, Model.Today.WeatherAbbreviation)" class="img-weather" alt="" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<div class="text-right">
+    Data and images courtesy of <a href="@providerUrl" target="MetaWeather"><img src="@providerLogo" alt="@providerName" class="img-footer"> @providerName</a>
+</div>
