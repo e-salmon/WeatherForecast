@@ -11,6 +11,6 @@ Default database is set for an unnamed SQL server instance. Run update--database
 Disclaimer: The data is provided courtesy of [MetaWeather](https://www.metaweather.com/)
 
 ## Screenshots
-[Desktop View](https://github.com/e-salmon/WeatherForecast/doc/Desktop%20View.jpg)
+[Desktop View](https://github.com/e-salmon/WeatherForecast/blob/master/doc/Desktop%20View.jpg)
 
-[Mobile View](https://github.com/e-salmon/WeatherForecast/doc/Mobile%20View.jpg)
+[Mobile View](https://github.com/e-salmon/WeatherForecast/blob/master/doc/Mobile%20View.jpg)
