@@ -17,18 +17,16 @@ $(function() {
     $("#btnRefresh").on("click", function() { updateForecast(); });
 });
 
-function updateForecast() {
+async function updateForecast() {
     $("#btnRefresh i").addClass("fa-spin");
-    $.get("/forecast-update",
-            function(data) {
-                $("#forecastContent").html(data);
-                countdown = autoRefreshInterval;
-        })
-        .fail(function() {
-            // Basic logging in case something went wrong.
-            console.log(arguments);
-        })
-        .always(function() {
-            $("#btnRefresh i").removeClass("fa-spin");
-        });
+    const response = await fetch("/forecast-update");
+    if (response.ok) {
+        const content = await response.text();
+        $("#forecastContent").html(content);
+        countdown = autoRefreshInterval;
+    } else {
+        console.log(response);
+    }
+
+    $("#btnRefresh i").removeClass("fa-spin");
 }

@@ -1,7 +1,6 @@
 using AutoMapper;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WeatherForecast.Configuration;
@@ -32,7 +31,7 @@ namespace WeatherForecast
         }
 
         [UsedImplicitly]
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseExceptionHandler("/Home/Error");
             // NOTE: Default HSTS value is 30 days. See https://aka.ms/aspnetcore-hsts for more info.

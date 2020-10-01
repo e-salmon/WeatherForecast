@@ -14,7 +14,8 @@ namespace WeatherForecast.Configuration.Extensions
     {
         public static void ConfigureDependencyInjection(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ForecastConnection")));
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlServer(configuration.GetConnectionString("ForecastConnection")));
 
             services
                 .AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
