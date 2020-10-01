@@ -10,3 +10,11 @@ Default database is set for an unnamed SQL server instance. Run update--database
 
 Disclaimer: The data is provided courtesy of [MetaWeather](https://www.metaweather.com/)
 
+## Screenshots
+Desktop View
+
+![Desktop View](/doc/Desktop%20View.jpg?raw=true "Desktop View")
+
+Mobile View
+
+![Mobile View](/doc/Mobile%20View.jpg?raw=true "Mobile View")
