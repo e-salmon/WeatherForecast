@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WeatherForecast.Configuration.Objects;
 using WeatherForecast.Core.Interfaces;
 using WeatherForecast.Core.Services;
 using WeatherForecast.Infrastructure.MetaWeatherClient;
@@ -20,6 +21,8 @@ namespace WeatherForecast.Configuration.Extensions
             services
                 .AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.Configure<WeatherDataProviderSettings>(configuration.GetSection("DataProviderSettings"));
 
             services.AddScoped<IWeatherService, WeatherService>();
 

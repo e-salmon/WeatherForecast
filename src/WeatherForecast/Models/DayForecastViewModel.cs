@@ -6,8 +6,10 @@ namespace WeatherForecast.Models
     {
         public DateTime Date { get; set; }
 
+        public string DisplayDate { get; set; }
+
         public string WeatherName { get; set; }
 
-        public string WeatherAbbreviation { get; set; }
+        public string WeatherImage { get; set; }
     }
 }

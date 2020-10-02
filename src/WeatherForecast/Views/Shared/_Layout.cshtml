@@ -21,13 +21,16 @@
         </main>
     </div>
     @Html.Partial("_Footer")
-
+    
+    @* NOTE: Still including JQuery since Identity pages need it. *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <environment names="Development">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
     @RenderSection("Scripts", required: false)

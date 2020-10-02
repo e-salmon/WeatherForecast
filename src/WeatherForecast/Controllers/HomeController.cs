@@ -5,7 +5,10 @@ using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using WeatherForecast.Configuration.Objects;
 using WeatherForecast.Core.Interfaces;
+using WeatherForecast.Core.Objects;
 using WeatherForecast.Models;
 
 namespace WeatherForecast.Controllers
@@ -14,16 +17,18 @@ namespace WeatherForecast.Controllers
     {
         private readonly IWeatherService _weatherService;
         private readonly IMapper _mapper;
+        private readonly WeatherDataProviderSettings _dataProviderSettings;
 
-        public HomeController(IWeatherService weatherService, IMapper mapper)
+        public HomeController(IWeatherService weatherService, IMapper mapper, IOptions<WeatherDataProviderSettings> dataProviderSettings)
         {
             _weatherService = weatherService;
             _mapper = mapper;
+            _dataProviderSettings = dataProviderSettings.Value;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(_dataProviderSettings);
         }
 
         [HttpGet("forecast-update")]
@@ -38,11 +43,15 @@ namespace WeatherForecast.Controllers
 
             var result = new ForecastViewModel
             {
-                Today = _mapper.Map<DayForecastViewModel>(data.Data.ConsolidatedWeather.First()),
-                Days = _mapper.Map<List<DayForecastViewModel>>(data.Data.ConsolidatedWeather.Skip(1))
+                Today = _mapper.Map<ConsolidatedWeather, DayForecastViewModel>(
+                    data.Data.ConsolidatedWeather.First(),
+                    opt => opt.AfterMap((src, dst) => dst.WeatherImage = string.Format(_dataProviderSettings.ImageUrlTemplate, dst.WeatherImage))),
+                Days = _mapper.Map<IEnumerable<ConsolidatedWeather>, List<DayForecastViewModel>>(
+                    data.Data.ConsolidatedWeather.Skip(1),
+                    opt => opt.AfterMap((src, dst) => dst.ForEach(d => d.WeatherImage = string.Format(_dataProviderSettings.ImageUrlTemplate, d.WeatherImage))))
             };
 
-            return PartialView("Partials/_Forecast", result);
+            return Ok(result);
         }
 
         [HttpGet("privacy")]
