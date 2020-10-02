@@ -34,7 +34,7 @@ else
                         <strong>@item.Date.ToString("ddd d MMM")</strong>
                     </td>
                     <td>@item.WeatherName</td>
-                    <td><img src="@string.Format(imageUrl, Model.Today.WeatherAbbreviation)" class="img-weather" alt="" /></td>
+                    <td><img src="@string.Format(imageUrl, item.WeatherAbbreviation)" class="img-weather" alt="" /></td>
                 </tr>
             }
         </tbody>
